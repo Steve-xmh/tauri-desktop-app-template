@@ -5,7 +5,8 @@ An app template just for desktop apps, with prebuilt controls titlebar.
 For personal usage only, use it at your own risk.
 
 <div align="center">
-<img width="912" alt="Appearance on macOS" src="https://github.com/user-attachments/assets/2a7bcca8-d7a9-4c06-aacd-ac56a64595da" />
+  <img width="814" alt="Appearance on Windows" src="https://github.com/user-attachments/assets/2d0de2e8-5a9b-41b8-bfa5-0c28b4b528cf" />
+  <img width="912" alt="Appearance on macOS" src="https://github.com/user-attachments/assets/2a7bcca8-d7a9-4c06-aacd-ac56a64595da" />
 </div>
 
 ## Features
