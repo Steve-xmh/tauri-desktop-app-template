@@ -2,13 +2,20 @@
  * Reference from: https://aka.ms/WinUI/3.0-figma-toolkit
  */
 
+import classNames from "classnames";
 import type { SystemControlProps } from "./index.tsx";
 import styles from "./windows.module.css";
+import { useRef } from "react";
+
 export function WindowsSystemsControls(props: SystemControlProps) {
+	const snapOverlayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 	return (
-		<div className={styles.controls}>
+		<div className={styles.controls} data-tauri-decorum-tb>
 			<button
 				type="button"
+				id="decorum-tb-minimize"
+				className="decorum-tb-btn"
 				aria-label="minimize window button"
 				onClick={props.onMinimized}
 			>
@@ -29,7 +36,25 @@ export function WindowsSystemsControls(props: SystemControlProps) {
 			</button>
 			<button
 				type="button"
+				id="decorum-tb-maximize"
+				className="decorum-tb-btn"
 				aria-label="maximize window button"
+				onMouseEnter={() => {
+					if (snapOverlayRef.current !== null)
+						clearTimeout(snapOverlayRef.current);
+					snapOverlayRef.current = setTimeout(async () => {
+						const { invoke } = await import("@tauri-apps/api/core");
+						const { getCurrentWindow } = await import("@tauri-apps/api/window");
+						const win = getCurrentWindow();
+						await win.setFocus();
+						await invoke("plugin:decorum|show_snap_overlay");
+					}, 620);
+				}}
+				onMouseLeave={() => {
+					if (snapOverlayRef.current === null) return;
+					clearTimeout(snapOverlayRef.current);
+					snapOverlayRef.current = null;
+				}}
 				onClick={props.onMaximized}
 			>
 				<svg
@@ -49,7 +74,8 @@ export function WindowsSystemsControls(props: SystemControlProps) {
 			</button>
 			<button
 				type="button"
-				className={styles.close}
+				id="decorum-tb-close"
+				className={classNames(styles.close, "decorum-tb-btn")}
 				aria-label="close window button"
 				onClick={props.onClosed}
 			>

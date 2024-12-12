@@ -21,6 +21,14 @@ identifier = "core:window:allow-unmaximize"
 identifier = "core:window:allow-show"
 [[permissions]]
 identifier = "core:window:allow-close"
+[[permissions]]
+identifier = "core:window:allow-center"
+[[permissions]]
+identifier = "core:window:allow-set-size"
+[[permissions]]
+identifier = "core:window:allow-set-focus"
+[[permissions]]
+identifier = "core:window:allow-is-maximized"
 
 [[permissions]]
 identifier = "os:default"
@@ -29,3 +37,6 @@ identifier = "os:allow-os-type"
 
 [[permissions]]
 identifier = "shell:default"
+
+[[permissions]]
+identifier = "decorum:allow-show-snap-overlay"
